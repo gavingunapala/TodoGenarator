@@ -66,9 +66,11 @@ const inputname = document.querySelector('.form__input--name');
 const inputDate = document.querySelector('.form__input--Date');
 const inputTitle = document.querySelector('.form__input--Title');
 const inputTodo = document.querySelector('.form__input--Todo');
+const bodyList = document.querySelector('.bodyList');
 
 //CLASS
 class List {
+  id = Date.now();
   constructor(name, date, title, todolist) {
     this.name = name;
     this.date = date;
@@ -103,17 +105,22 @@ class App {
     inputname.value = inputDate.value = inputTitle.value = inputTodo.value = '';
   }
 
-  _renderWorkout(workout) {
+  _renderWorkout(listItems) {
     let html = `
-      <li class="workout workout--${workout.name}" data-id="${workout.date}">
-        <h2 class="workout__title">${workout.title}</h2>
+    <li ><button class="btn--close-modal">&times;</button></li>
+      <li class="workout workout--running" data-id="${listItems.id}">
+        <h2 class="workout__title">${listItems.title}${listItems.name} ${listItems.id}</h2>
         <div class="workout__details">
-          <span class="workout__value">${workout.todo}</span>
+          <span class="workout__value">${listItems.todolist}</span>
           <span class="workout__unit">km</span>
+          
         </div>
+        </li>
     `;
-    form.insertAdjacentHTML('afterend', html);
+    bodyList.insertAdjacentHTML('afterend', html);
   }
+
+  _deleteData(id) {}
 }
 
 const app = new App();
